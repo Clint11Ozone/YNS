@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp QR Code</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('qrCode', function(src) {
+        document.getElementById('qrCode').src = src;
+      });
+    </script>
+</head>
+<body>
+    <h1>Scan this QR Code with WhatsApp</h1>
+    <img id="qrCode" src="" alt="QR Code">
+</body>
+</html>
