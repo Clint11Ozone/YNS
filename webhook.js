@@ -1,4 +1,5 @@
 const { sendMessage } = require("./whatsapp");
+const db = require("./database")
 
 async function checkMoveInDate(moveInDate) {
   // Calculate the difference in milliseconds between move-in date and today
@@ -44,6 +45,11 @@ async function handleWebhook(req, res) {
   console.log(`City Budget: ${cityBudget}`);
 
   const phoneNumber = "+27760399608";
+  const phone = "27760399608"
+
+  await db.saveUserDetails(phone, {
+    firstName, moveInDate
+});
 
   // Check if user's budget is within the city budget range
   if (parseInt(budget) >= parseInt(cityBudget)) {
@@ -62,6 +68,8 @@ async function handleWebhook(req, res) {
   res.status(200).send("Webhook received successfully");
 
   return firstName;
-}
+} 
+
+
 
 module.exports = { handleWebhook};

@@ -38,12 +38,12 @@ async function sendMessage(phoneNumber, message, firstName='') {
 
 client.on('message', async msg => {
     
-    const { firstName } = await handleWebhook(req, res); // Assuming req and res are available
+    // const { firstName } = await handleWebhook(req, res); // Assuming req and res are available
 
     if (msg.body.toLowerCase() === 'start') {
         const userId = msg.from;
         setConversationState(userId, { stage: 'question1' });
-        client.sendMessage(userId, `${firstName} To help you find your perfect home, we'd love to know more about what you like. This will help us tailor the search just for you:`);
+        client.sendMessage(userId, `{{firstName}} To help you find your perfect home, we'd love to know more about what you like. This will help us tailor the search just for you:`);
     } else {
         const userId = msg.from;
         const state = getConversationState(userId);
