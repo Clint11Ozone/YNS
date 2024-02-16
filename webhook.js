@@ -13,9 +13,15 @@ async function checkMoveInDate(moveInDate) {
 }
 
 const cityBudgets = [
+<<<<<<< HEAD
   { name: "Amsterdam", budget: 1800 },
   { name: "Rotterdam", budget: 1000 },
   { name: "Utrecht", budget: 1000 }, // Assuming monthly budget is converted to yearly
+=======
+  { name: "Amsterdam", budget: 1700 },
+  { name: "Rotterdam", budget: 1000 },
+  { name: "Utrecht", budget: 900 }, // Assuming monthly budget is converted to yearly
+>>>>>>> fc78724099dbbffad53da5543a7ac8498bea90d2
   { name: "Den Haag", budget: 1000 },
   { name: "Haarlem", budget: 1800 },
 ];

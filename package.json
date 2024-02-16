@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "express": "^4.18.2",
+<<<<<<< HEAD
     "next": "^14.1.0",
+=======
+>>>>>>> fc78724099dbbffad53da5543a7ac8498bea90d2
     "qrcode": "^1.5.3",
     "qrcode-terminal": "^0.12.0",
     "socket.io": "^4.7.4",
