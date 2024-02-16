@@ -23,8 +23,5 @@ let webhookReceived = false;
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
-<<<<<<< HEAD
 
 
-=======
->>>>>>> fc78724099dbbffad53da5543a7ac8498bea90d2
