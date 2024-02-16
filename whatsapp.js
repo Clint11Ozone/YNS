@@ -1,33 +1,29 @@
 const { Client, NoAuth } = require("whatsapp-web.js");
-// const qrcode = require('qrcode-terminal');
-const { getConversationState, setConversationState } = require('./conversationState');
-const { handleWebhook} = require('./webhook');
 const qrcode = require('qrcode');
-const { wss } = require('./server'); // Adjust the path as necessary
-const WebSocket = require('ws');
-
-
+const { getConversationState, setConversationState } = require('./conversationState');
+const { handleWebhook } = require('./webhook');
 
 const client = new Client({ authStrategy: new NoAuth() });
 
-
-client.initialize();
-
-client.on('qr', qr => {
-    qrcode.toDataURL(qr, (err, url) => {
-        wss.clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify({ type: 'qrCode', data: url }));
-            }
+async function generateQRCode() {
+    return new Promise((resolve, reject) => {
+        client.on('qr', (qr) => {
+            qrcode.toDataURL(qr, (err, url) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(url);
+                }
+            });
         });
+
+        client.initialize();
     });
-});
+}
 
 client.on('ready', () => {
     console.log('WhatsApp Client is ready!');
 });
-
-
 
 async function sendMessage(phoneNumber, message, firstName='') {
     try {
@@ -41,13 +37,10 @@ async function sendMessage(phoneNumber, message, firstName='') {
 }
 
 client.on('message', async msg => {
-    
-    const { firstName } = await handleWebhook(req, res); // Assuming req and res are available
-
     if (msg.body.toLowerCase() === 'start') {
         const userId = msg.from;
         setConversationState(userId, { stage: 'question1' });
-        client.sendMessage(userId, `{{firstName}} To help you find your perfect home, we'd love to know more about what you like. This will help us tailor the search just for you:`);
+        client.sendMessage(userId, `${firstName} To help you find your perfect home, we'd love to know more about what you like. This will help us tailor the search just for you:`);
     } else {
         const userId = msg.from;
         const state = getConversationState(userId);
@@ -63,17 +56,17 @@ client.on('message', async msg => {
                 break;
             case 'question3':
                 // End of conversation
-                setConversationState(userId, { stage: 'question4' }); // Corrected 'question4'
+                setConversationState(userId, { stage: 'question4' });
                 client.sendMessage(userId, `🤩 Extras: What do your prefer (e.g., balcony, pet-friendly)`);
                 break;
             case 'question4':
                 // End of conversation
-                setConversationState(userId, { stage: 'question5' }); // Corrected 'question5'
+                setConversationState(userId, { stage: 'question5' });
                 client.sendMessage(userId, `🎉 Congratulations! We're thrilled to help you find the perfect home. We'll be in touch with some listings soon.`);
                 break;
             case 'question5':
                 // End of conversation
-                setConversationState(userId, { stage: 'question6' }); // Corrected 'question6'
+                setConversationState(userId, { stage: 'question6' });
                 client.sendMessage(userId, `📈 Speed up the process! Upload your documents now for priority assistance and get listings faster. [LINK] 
                 ✅ Type 'done' after uploading.  
                 😕 Prefer not to? Type 'listings'.`);
@@ -85,4 +78,4 @@ client.on('message', async msg => {
     }
 });
 
-module.exports = { sendMessage };
+module.exports = { sendMessage, generateQRCode };
