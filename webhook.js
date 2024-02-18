@@ -27,6 +27,7 @@ async function handleWebhook(req, res) {
 
   // Extracting specific values
   const firstName = fields.find((field) => field.label === "First Name")?.value;
+  const pNumber = fields.find((field)=> field.label === "Phone")?.value
   const moveInDate = fields.find((field) => field.label === "Move-in date")?.value;
   const householdComposition = fields.find((field) => field.label === "Please describe the composition of the household.")?.options.find((option) => option.id === fields.find((field) => field.label === "Please describe the composition of the household.").value[0])?.text;
   const interior = fields.find((field) => field.label === "Interior")?.options.find((option) => option.id === fields.find((field) => field.label === "Interior").value[0])?.text;
@@ -36,6 +37,7 @@ async function handleWebhook(req, res) {
   const cityBudget = cityBudgets.find((city) => city.name === chosenCity)?.budget;
 
   console.log(`First Name: ${firstName}`);
+  console.log(`Phone Number: ${pNumber}`);
   console.log(`Budget: ${budget}`);
   console.log(`City: ${chosenCity}`);
   console.log(`Move-in Date: ${moveInDate}`);
@@ -44,11 +46,11 @@ async function handleWebhook(req, res) {
   console.log(`Chosen City: ${chosenCity}`);
   console.log(`City Budget: ${cityBudget}`);
 
-  const phoneNumber = "+27760399608";
-  const phone = "27760399608"
+  const phoneNumber = "+31642364788";
+  
 
-  await db.saveUserDetails(phone, {
-    firstName, moveInDate
+  await db.saveUserDetails(pNumber, {
+    firstName, moveInDate, pNumber, budget
 });
 
   // Check if user's budget is within the city budget range
