@@ -11,6 +11,6 @@
     "whatsapp-web.js": "^1.23.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node pages/index.js"
   }
 }
