@@ -1,5 +1,7 @@
 const { sendMessage } = require("./whatsapp");
-const db = require("./database")
+const context = require('./context');
+
+
 
 async function checkMoveInDate(moveInDate) {
   // Calculate the difference in milliseconds between move-in date and today
@@ -20,6 +22,8 @@ const cityBudgets = [
   { name: "Haarlem", budget: 1800 },
 ];
 
+let firstName;
+
 async function handleWebhook(req, res) {
   const payload = req.body;
   const fields = payload.data.fields;
@@ -27,11 +31,19 @@ async function handleWebhook(req, res) {
 
   // Extracting specific values
   const firstName = fields.find((field) => field.label === "First Name")?.value;
+  context.emit('firstName', firstName);
+
   const pNumber = fields.find((field)=> field.label === "Phone")?.value
+  context.emit('number', pNumber);
+
   const moveInDate = fields.find((field) => field.label === "Move-in date")?.value;
+  context.emit('date', moveInDate);
+
   const householdComposition = fields.find((field) => field.label === "Please describe the composition of the household.")?.options.find((option) => option.id === fields.find((field) => field.label === "Please describe the composition of the household.").value[0])?.text;
   const interior = fields.find((field) => field.label === "Interior")?.options.find((option) => option.id === fields.find((field) => field.label === "Interior").value[0])?.text;
   const budget = fields.find((field) => field.label === "Budget")?.value;
+  context.emit('budget', budget);
+
   const chosenCityOption = fields.find((field) => field.label === "City")?.options.find((option) => option.id === fields.find((field) => field.label === "City").value[0]);
   const chosenCity = chosenCityOption?.text;
   const cityBudget = cityBudgets.find((city) => city.name === chosenCity)?.budget;
@@ -46,12 +58,10 @@ async function handleWebhook(req, res) {
   console.log(`Chosen City: ${chosenCity}`);
   console.log(`City Budget: ${cityBudget}`);
 
-  const phoneNumber = "+31642364788";
-  
+  const phoneNumber = pNumber;
 
-  await db.saveUserDetails(pNumber, {
-    firstName, moveInDate, pNumber, budget
-});
+
+
 
   // Check if user's budget is within the city budget range
   if (parseInt(budget) >= parseInt(cityBudget)) {
@@ -75,4 +85,5 @@ async function handleWebhook(req, res) {
 
 
 module.exports = { handleWebhook};
+
 
