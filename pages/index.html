@@ -1,0 +1,30 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp QR Code</title>
+  </head>
+  <body>
+      <h1>Scan this QR Code with WhatsApp</h1>
+      <img id="qrCode" src="" alt="QR Code">
+    
+    <script>
+      const ws = new WebSocket('ws://localhost:3000');
+
+      ws.onopen = function() {
+          console.log('WebSocket connected');
+      };
+
+      ws.onmessage = function(event) {
+          const data = JSON.parse(event.data);
+          if (data.type === 'qrCode') {
+              document.getElementById('qrCode').src = data.data;
+          }
+      };
+
+      ws.onclose = function() {
+          console.log('WebSocket closed');
+      };
+  </script>
+
+</body>
+</html> -->
