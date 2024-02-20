@@ -11,6 +11,10 @@
     "whatsapp-web.js": "^1.23.0"
   },
   "scripts": {
-    "start": "node pages/index.js"
+    "start": "node pages/index.js",
+    "build": "next build"
+  },
+  "engines": {
+    "npm": "10.4.0"
   }
 }
