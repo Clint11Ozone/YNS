@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path'); // Import path module
-const { handleWebhook } = require('./webhook');
-const { generateQRCode } = require('./whatsapp'); // Import the generateQRCode function
+const { handleWebhook } = require('../webhook');
+const { generateQRCode } = require('../whatsapp'); // Import the generateQRCode function
 
 const app = express();
 const port = 3000;
