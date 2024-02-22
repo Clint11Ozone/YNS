@@ -80,7 +80,7 @@ client.on("message", async (msg) => {
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `🏠 What is your style: What style of home are you drawn to? (modern, traditional, loft)`
+            `🏠 Describe your dream home in 5 words: What features make it perfect? (e.g., view, balcony, spacious, elegant, cozy)`
           );
         }, 3000);
         break;
@@ -90,7 +90,7 @@ client.on("message", async (msg) => {
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `🤩 Extras: What do your prefer (e.g., balcony, pet-friendly)`
+            `🤩 Any other must-haves or deal-breakers? (e.g., home office, backyard, pet-friendly)`
           );
         }, 3000);
         break;
@@ -99,7 +99,7 @@ client.on("message", async (msg) => {
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `🎉 Congratulations! We're thrilled to help you find the perfect home. We'll be in touch with some listings soon.`
+            `🎉 Thank you for the info! Ready to find your dream home? Type "Ready" to begin.`
           );
         }, 3000);
         setTimeout(() => {
@@ -107,11 +107,11 @@ client.on("message", async (msg) => {
             userId,
             `📈 Speed up the process! Upload your documents now for priority assistance and get listings faster. https://upload.ynsagency.nl
   
-  PS. Can't click the link? Just add us to contacts to activate it!
+PS. Can't click the link? Just add us to contacts to activate it!
 
-  ✅ Type 'done' after uploading.
+✅ Type 'done' after uploading.
   
-  😕 Prefer not to? Type 'listings'.`
+😕 Prefer not to? Type 'listings'.`
           );
         }, 10000);
         break;
