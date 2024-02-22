@@ -6,21 +6,12 @@ const { generateQRCode } = require('./whatsapp'); // Import the generateQRCode f
 
 const app = express();
 const port = process.env.PORT || 3000;
-const puppeteer = require('puppeteer'); 
-
-
 
 app.use(bodyParser.json());
 
 // Serve the HTML file with the QR code image
 app.get('/', async (req, res) => {
 
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
-      });
-    
-      const page = await browser.newPage();
       
     try {
         // Generate QR code

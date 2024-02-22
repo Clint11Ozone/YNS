@@ -1,2 +1,4 @@
-node_modules/puppeteer/.local-chromium/**
 .vercel
+node_modules
+node_modules
+node_modules
