@@ -17,4 +17,4 @@ jobs:
         ssh_host: 89.233.107.41
         ssh_private_key: ${{ secrets.EXAMPLE_COM_SSH_PRIVATE_KEY }}
         ssh_user: ${{ secrets.EXAMPLE_COM_SSH_USER }}
-        docker_compose_prefix: clint_ynsw
+        docker_compose_prefix: github
