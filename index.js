@@ -36,15 +36,6 @@ app.get('/', async (req, res) => {
 // Handle webhook
 app.post('/webhook', handleWebhook);
 
-// Error handling for webhook not received
-let webhookReceived = false;
-// setInterval(() => {
-// if (!webhookReceived) {
-// console.log('Webhook not received');
-// }
-// webhookReceived = false;
-// }, 10000);
-
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });

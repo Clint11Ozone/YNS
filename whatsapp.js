@@ -24,7 +24,7 @@ async function generateQRCode() {
   });
 }
 client.on("ready", () => {
-  console.log("WhatsApp Client is ready!");
+  console.log("WhatsApp Client is ready for connection!");
 });
 
 async function sendMessage(phoneNumber, message, firstName = "") {
@@ -59,6 +59,17 @@ client.on("message", async (msg) => {
       client.sendMessage(
         userId,
         `${name} To help you find your perfect home, we'd love to know more about what you like. This will help us tailor the search just for you:`
+      );
+    }, 3000);
+  } else if(msg.body.toLowerCase() === "budget"){
+    const userId = msg.from;
+    setConversationState(userId, { stage: "question1" });
+    setTimeout(() => {
+      client.sendMessage(
+        userId,
+        `🌟 Minimum Budgets for 1 Bedroom Homes 🌟
+Before we embark on our journey, here are the minimum budgets we adhere to. Please note that for multiple bedrooms, a higher budget may be necessary.
+Amsterdam: €1800 per monthRotterdam: €1500 per monthUtrecht: €1000 per monthDen Haag (The Hague): €1500 per monthHaarlem: €1800 per monthFeel free to reach out if you have any questions or need further assistance! 😊🏡`
       );
     }, 3000);
   } else {
