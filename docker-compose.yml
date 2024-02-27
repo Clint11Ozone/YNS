@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  clint-ynsw:
+    container_name: 'clint-ynsw'
+    build: .
+    cap_add:
+    - SYS_ADMIN
+    networks:
+      abslm-network:
+        ipv4_address: 10.100.25.10
+
+networks:
+  abslm-network:
+    external: true
+    name: abslm-network
