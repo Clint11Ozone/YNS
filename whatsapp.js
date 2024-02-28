@@ -12,19 +12,25 @@ client.initialize();
 
 async function generateQRCode() {
   return new Promise((resolve, reject) => {
-    client.on("qr", (qr) => {
+    const qrListener = (qr) => {
       qrcode.toDataURL(qr, (err, url) => {
         if (err) {
           reject(err);
         } else {
           resolve(url);
+          // Remove the listener after generating the QR code
+          client.removeListener("qr", qrListener);
         }
       });
-    });
+    };
+
+    client.on("qr", qrListener);
   });
 }
+
 client.on("ready", () => {
   console.log("WhatsApp Client is ready for connection!");
+  client.removeAllListeners("qr");
 });
 
 async function sendMessage(phoneNumber, message, firstName = "") {
