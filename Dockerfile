@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 node:18-slim
+FROM node:18
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -43,9 +43,6 @@ RUN for i in 1 2 3; \
       sleep 10; \
       ([ $i -eq 3 ] && exit 1) || true; \
     done;
-
-
-
 
 ENV PORT=8080
 
