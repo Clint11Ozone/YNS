@@ -49,8 +49,8 @@ let firstName = "";
 context.on("firstName", (name) => {
   firstName = name;
 });
-context.on("budget", (budget) =>{
-  newBudget = budget
+context.on("budget", (budget) => {
+  newBudget = budget;
 });
 
 client.on("message", async (msg) => {
@@ -60,14 +60,19 @@ client.on("message", async (msg) => {
     const name = firstName; // Use the updated firstName here
 
     setConversationState(userId, { stage: "question1" });
-
     setTimeout(() => {
       client.sendMessage(
         userId,
-        `${name} To help you find your perfect home, we'd love to know more about what you like. This will help us tailor the search just for you:`
+        `To assist you in finding your ideal home, we're eager to learn more about your preferences. If you prefer to skip the question, simply type '*skip*'.`
       );
     }, 3000);
-  } else if(msg.body.toLowerCase() === "budget"){
+    setTimeout(() => {
+      client.sendMessage(
+        userId,
+        `📍Location: What's your ideal area or neighborhood?`
+      );
+    }, 5000);
+  } else if (msg.body.toLowerCase() === "budget") {
     const userId = msg.from;
     setConversationState(userId, { stage: "question1" });
     setTimeout(() => {
@@ -88,61 +93,58 @@ Amsterdam: €1800 per monthRotterdam: €1500 per monthUtrecht: €1000 per mon
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `📍Location: What's your ideal area or neighborhood?`
+            `🏠 Could you describe your dream home please? What features make it perfect? (e.g., view, balcony, spacious, elegant, cozy).`
           );
-        }, 3000);
+        }, 2000);
         break;
       case "question2":
         setConversationState(userId, { stage: "question3" });
-        setTimeout(() => {
-          client.sendMessage(
-            userId,
-            `🏠 Describe your dream home in 5 words: What features make it perfect? (e.g., view, balcony, spacious, elegant, cozy)`
-          );
-        }, 3000);
-        break;
-      case "question3":
-        setConversationState(userId, { stage: "question4" });
 
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `🤩 Any other must-haves or deal-breakers? (e.g., home office, backyard, pet-friendly)`
+            `❌ Any deal-breakers? (e.g., noisy location, lack of natural light)`
           );
-        }, 3000);
+        }, 2000);
         break;
-      case "question4":
-        setConversationState(userId, { stage: "question5" });
+      case "question3":
+        const budget1 = newBudget;
+        setConversationState(userId, { stage: "question4" });
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `🎉 Thank you for the info! Ready to find your dream home? Type "Ready" to begin.`
+            `Shall we stick to listings within your budget of €${budget1} only? 😊 
+
+Or open to exceeding it for the right match? Please reply with your max budget.`
           );
-        }, 3000);
+        }, 2000);
+        break;
+      case "question4":
+        setConversationState(userId, { stage: "question5" });
+        client.sendMessage(
+          userId,
+          `🎉 Thank you for the info! Ready to find your dream home? Type '*ready*' to begin.`
+        );
+        break;
+        case "question5":
+        setConversationState(userId, { stage: "question6" });
+        client.sendMessage(
+          userId,
+          `Alright, let's do this! 😄 We'll do our best for you! 💪`
+        );
+
         setTimeout(() => {
           client.sendMessage(
             userId,
             `📈 Speed up the process! Upload your documents now for priority assistance and get listings faster. https://upload.ynsagency.nl
-  
+        
 PS. Can't click the link? Just add us to contacts to activate it!
-
+        
 ✅ Type 'done' after uploading.
-  
+        
 😕 Prefer not to? Type 'listings'.`
           );
-        }, 10000);
-        break;
-      case "question5":
-        const budget1 = newBudget;
-        setConversationState(userId, { stage: "question6" });
-        setTimeout(() => {
-          client.sendMessage(
-            userId,
-            `Shall we stick to listings within your budget of ${budget1} only? 😊 
-
-Or open to exceeding it for the right match? Please reply with your max budget.`
-          );
-        }, 5000);
+        }, 1000);
         break;
       default:
         // Optional: handle unexpected messages or reset the conversation
@@ -152,3 +154,5 @@ Or open to exceeding it for the right match? Please reply with your max budget.`
 });
 
 module.exports = { sendMessage, generateQRCode };
+
+

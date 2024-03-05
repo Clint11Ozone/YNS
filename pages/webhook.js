@@ -66,14 +66,14 @@ async function handleWebhook(req, res) {
   // Check if user's budget is within the city budget range
   if (parseInt(budget) >= parseInt(cityBudget)) {
     if (await checkMoveInDate(moveInDate)) {
-      const message = `Hi ${firstName}, we're excited to help you find your new home quickly. To get started, type 'start'.`;
+      const message = `😊 Hi ${firstName}, we're excited to help you find your new home quickly. To get started, type, '*start*'.`;
       await sendMessage(phoneNumber, message);
     } else {
-      const message = `Hi ${firstName}, we can’t wait to help you find your new home on ${moveInDate}. Don’t worry, we will notify you by then. In the meantime, feel free to reach out if you have any questions.`;
+      const message = `😊 Hi ${firstName}, we can’t wait to help you find your new home on ${moveInDate}. Don’t worry, we will notify you by then. In the meantime, feel free to reach out if you have any questions.`;
       await sendMessage(phoneNumber, message);
     }
   } else {
-    const message = `Hi ${firstName}, we have received your registration on our website. Unfortunately, we cannot proceed with the budget you have provided. Considering the current housing market conditions and our no cure, no pay policy, we have had to establish a minimum budget requirement. Thank you for your understanding. If you would like to inquire about the minimum budgets, please respond with 'budget'.`;
+    const message = `😊 Hi ${firstName}, we have received your registration on our website. Unfortunately, we cannot proceed with the budget you have provided. Considering the current housing market conditions and our no cure, no pay policy, we have had to establish a minimum budget requirement. Thank you for your understanding. If you would like to inquire about the minimum budgets, please respond with 'budget'.`;
     await sendMessage(phoneNumber, message);
   }
 
