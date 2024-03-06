@@ -78,9 +78,18 @@ client.on("message", async (msg) => {
     setTimeout(() => {
       client.sendMessage(
         userId,
-        `🌟 Minimum Budgets for 1 Bedroom Homes 🌟
-Before we embark on our journey, here are the minimum budgets we adhere to. Please note that for multiple bedrooms, a higher budget may be necessary.
-Amsterdam: €1800 per monthRotterdam: €1500 per monthUtrecht: €1000 per monthDen Haag (The Hague): €1500 per monthHaarlem: €1800 per monthFeel free to reach out if you have any questions or need further assistance! 😊🏡`
+        `🌟 Minimum Budgets for 1 Bedroom Apartments 🌟
+
+Please note that for multiple bedrooms, a higher budget may be necessary. You should think about an additional €400 euros per extra bedroom.
+        
+Per month, excluding utilities:
+•⁠  ⁠Amsterdam: €1800 
+•⁠  ⁠Rotterdam: €1500
+•⁠  ⁠Utrecht: €1000 
+•⁠  ⁠The Hague: €1500 
+•⁠  ⁠Haarlem: €1800 
+        
+Feel free to reach out if you have any questions or need further assistance! 😊🏡`
       );
     }, 3000);
   } else {

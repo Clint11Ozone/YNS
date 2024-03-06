@@ -16,9 +16,9 @@ async function checkMoveInDate(moveInDate) {
 
 const cityBudgets = [
   { name: "Amsterdam", budget: 1800 },
-  { name: "Rotterdam", budget: 1000 },
+  { name: "Rotterdam", budget: 1500 },
   { name: "Utrecht", budget: 1000 }, // Assuming monthly budget is converted to yearly
-  { name: "Den Haag", budget: 1000 },
+  { name: "Den Haag", budget: 1500 },
   { name: "Haarlem", budget: 1800 },
 ];
 
@@ -69,7 +69,7 @@ async function handleWebhook(req, res) {
       const message = `😊 Hi ${firstName}, we're excited to help you find your new home quickly. To get started, type '*start*'.`;
       await sendMessage(phoneNumber, message);
     } else {
-      const message = `😊 Hi ${firstName}, we can’t wait to help you find your new home on ${moveInDate}. Don’t worry, we will notify you by then. In the meantime, feel free to reach out if you have any questions.`;
+      const message = `😊 Hi ${firstName}, we're excited to be part of your journey in finding your new home on ${moveInDate}. You can trust that we will get in touch with you well over a month in advance to kickstart your search for your new home. Please bear in mind that the properties we secure off-market are often available immediately, so it's crucial for us to move quickly. This is why we're holding off on active searching for now. If you have any questions in the meantime, feel free to reach out!`;
       await sendMessage(phoneNumber, message);
     }
   } else {
