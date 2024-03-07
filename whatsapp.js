@@ -92,6 +92,15 @@ Per month, excluding utilities:
 Feel free to reach out if you have any questions or need further assistance! 😊🏡`
       );
     }, 3000);
+
+    setTimeout(() => {
+      client.sendMessage(
+        userId,
+        `If you wish to increase your budget, please re-submit your details on our website https://ynsagency.nl. We'll reach out to you shortly and strive to find you a new home that fits your preferences!`
+      );
+    }, 3000);
+
+    client.destroy();
   } else {
     const userId = msg.from;
     const state = getConversationState(userId);
