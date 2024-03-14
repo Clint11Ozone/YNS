@@ -91,7 +91,7 @@ Per month, excluding utilities:
         
 Feel free to reach out if you have any questions or need further assistance! 😊🏡`
       );
-    }, 3000);
+    }, 2000);
 
     setTimeout(() => {
       client.sendMessage(
@@ -100,7 +100,10 @@ Feel free to reach out if you have any questions or need further assistance! �
       );
     }, 3000);
 
-    client.destroy();
+    setTimeout(() => {
+      client.destroy();
+    }, 5100);
+
   } else {
     const userId = msg.from;
     const state = getConversationState(userId);
@@ -144,7 +147,7 @@ Or open to exceeding it for the right match? Please reply with your max budget.`
           `🎉 Thank you for the info! Ready to find your dream home? Type '*ready*' to begin.`
         );
         break;
-        case "question5":
+      case "question5":
         setConversationState(userId, { stage: "question6" });
         client.sendMessage(
           userId,
@@ -172,5 +175,3 @@ PS. Can't click the link? Just add us to contacts to activate it!
 });
 
 module.exports = { sendMessage, generateQRCode };
-
-

@@ -37,6 +37,8 @@ async function handleWebhook(req, res) {
   context.emit('number', pNumber);
 
   const moveInDate = fields.find((field) => field.label === "Move-in date")?.value;
+  const parts = moveInDate.split("-");
+  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
   context.emit('date', moveInDate);
 
   const householdComposition = fields.find((field) => field.label === "Please describe the composition of the household.")?.options.find((option) => option.id === fields.find((field) => field.label === "Please describe the composition of the household.").value[0])?.text;
@@ -52,7 +54,7 @@ async function handleWebhook(req, res) {
   console.log(`Phone Number: ${pNumber}`);
   console.log(`Budget: ${budget}`);
   console.log(`City: ${chosenCity}`);
-  console.log(`Move-in Date: ${moveInDate}`);
+  console.log(`Move-in Date: ${formattedDate}`);
   console.log(`Household Composition: ${householdComposition}`);
   console.log(`Interior: ${interior}`);
   console.log(`Chosen City: ${chosenCity}`);
@@ -69,7 +71,7 @@ async function handleWebhook(req, res) {
       const message = `😊 Hi ${firstName}, we're excited to help you find your new home quickly. To get started, type '*start*'.`;
       await sendMessage(phoneNumber, message);
     } else {
-      const message = `😊 Hi ${firstName}, we're excited to be part of your journey in finding your new home on ${moveInDate}. You can trust that we will get in touch with you well over a month in advance to kickstart your search for your new home. Please bear in mind that the properties we secure off-market are often available immediately, so it's crucial for us to move quickly. This is why we're holding off on active searching for now. If you have any questions in the meantime, feel free to reach out!`;
+      const message = `😊 Hi ${firstName}, we're excited to be part of your journey in finding your new home on ${formattedDate}. You can trust that we will get in touch with you well over a month in advance to kickstart your search for your new home. Please bear in mind that the properties we secure off-market are often available immediately, so it's crucial for us to move quickly. This is why we're holding off on active searching for now. If you have any questions in the meantime, feel free to reach out!`;
       await sendMessage(phoneNumber, message);
     }
   } else {
