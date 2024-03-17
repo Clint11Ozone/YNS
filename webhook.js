@@ -75,7 +75,7 @@ async function handleWebhook(req, res) {
       await sendMessage(phoneNumber, message);
     }
   } else {
-    const message = `😊 Hi ${firstName}, we have received your registration on our website. Unfortunately, we cannot proceed with the budget you have provided. Considering the current housing market conditions and our no cure, no pay policy, we have had to establish a minimum budget requirement. Thank you for your understanding. If you would like to inquire about the minimum budgets, please respond with 'budget'.`;
+    const message = `😊 Hi ${firstName}, we have received your registration on our website. Unfortunately, we cannot proceed with the budget you have provided. Considering the current housing market conditions and our no cure, no pay policy, we have had to establish a minimum budget requirement. Thank you for your understanding. If you would like to inquire about the minimum budgets, please respond with '*budget*'.`;
     await sendMessage(phoneNumber, message);
   }
 
