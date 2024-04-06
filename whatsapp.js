@@ -1,4 +1,4 @@
-const { Client, NoAuth, LocalAuth } = require("whatsapp-web.js");
+const { Client, NoAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
 const {
   getConversationState,
@@ -7,13 +7,12 @@ const {
 const context = require("./context");
 
 const client = new Client({
-  authStrategy: new LocalAuth({ dataPath: "sessions" }),
-  webVersionCache: {
-    type: 'remote',
-    remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
-  }
-});
-
+  webVersionCache: 
+  {
+    remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2402.5-beta.html',
+    type: 'remote' 
+  } 
+})
 client.initialize();
 
 async function generateQRCode() {
