@@ -162,13 +162,7 @@ Or open to exceeding it for the right match? Please reply with your max budget.`
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `📈 Speed up the process! Upload your documents now for priority assistance and get listings faster. https://upload.ynsagency.nl
-        
-PS. Can't click the link? Just add us to contacts to activate it!
-        
-✅ Type 'done' after uploading.
-        
-😕 Prefer not to? Type 'listings'.`
+            `To offer you the most effective support, we need to understand your financial situation better. Would you mind sharing some details about yourself, including your occupation, gross monthly income, etc.?`
           );
         }, 1000);
         break;
