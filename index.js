@@ -5,7 +5,7 @@ const { handleWebhook } = require('./webhook');
 const { generateQRCode } = require('./whatsapp'); // Import the generateQRCode function
 
 const app = express();
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3003;
 
 app.use(bodyParser.json());
 
