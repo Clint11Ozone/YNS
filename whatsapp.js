@@ -35,7 +35,7 @@ async function generateQRCode() {
 }
 
 client.on("ready", () => {
-  console.log("WhatsApp Client is ready for connection!");
+  console.log("WhatsApp Client is ready for connectin!");
   client.removeAllListeners("qr");
 });
 
