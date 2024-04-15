@@ -1,4 +1,4 @@
-const { Client, NoAuth } = require("whatsapp-web.js");
+const { Client, NoAuth, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
 const {
   getConversationState,
@@ -7,15 +7,16 @@ const {
 const context = require("./context");
 
 const client = new Client({
-  webVersionCache: 
-  {
-    remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2402.5-beta.html',
-    type: 'remote' 
-  } 
-})
+  authStrategy: new LocalAuth({ dataPath: "sessions" }),
+  webVersionCache: {
+    type: 'remote',
+    remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
+  }
+});
+
 client.initialize();
 
-async function generateQRCode() {
+ function generateQRCode() {
   return new Promise((resolve, reject) => {
     const qrListener = (qr) => {
       qrcode.toDataURL(qr, (err, url) => {
@@ -34,7 +35,7 @@ async function generateQRCode() {
 }
 
 client.on("ready", () => {
-  console.log("WhatsApp Client is ready for connection!");
+  console.log("WhatsApp Client is ready for connectin!");
   client.removeAllListeners("qr");
 });
 
@@ -162,13 +163,7 @@ Or open to exceeding it for the right match? Please reply with your max budget.`
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `📈 Speed up the process! Upload your documents now for priority assistance and get listings faster. https://upload.ynsagency.nl
-        
-PS. Can't click the link? Just add us to contacts to activate it!
-        
-✅ Type 'done' after uploading.
-        
-😕 Prefer not to? Type 'listings'.`
+            `To offer you the most effective support, we need to understand your financial situation better. Would you mind sharing some details about yourself, including your occupation, gross monthly income, etc.?`
           );
         }, 1000);
         break;
