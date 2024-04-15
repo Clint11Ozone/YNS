@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 Run #5 Getting Started with Create React App
-=======
-Run #9 Getting Started with Create React App
->>>>>>> 66a52e06ea67bbef7a4c159021674d43af6f679d
-=======
-Run #5 Getting Started with Create React App
->>>>>>> parent of 18cdaff (Merge branch 'main' of https://github.com/Allplans-SA/YNSwebhook)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
