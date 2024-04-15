@@ -11,8 +11,6 @@ app.use(bodyParser.json());
 
 // Serve the HTML file with the QR code image
 app.get('/', async (req, res) => {
-
-      
     try {
         // Generate QR code
         const qrDataUrl = await generateQRCode();

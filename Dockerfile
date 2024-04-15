@@ -22,6 +22,7 @@ RUN apt update -qq \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV CHROME_PATH=/usr/bin/chromium
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV DEBUG=whatsapp-web.js* 
 
 WORKDIR /home/pptruser
 
