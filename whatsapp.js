@@ -11,7 +11,7 @@ const client = new Client({
   }
 });
 
-client.setMaxListeners(100);
+client.setMaxListeners(5);
 client.initialize();
 
 let qrDataUrl = null; // Initialize the variable to store the QR code data URL
