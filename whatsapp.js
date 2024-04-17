@@ -14,9 +14,11 @@ const client = new Client({
   }
 });
 
+
+client.setMaxListeners(5);
 client.initialize();
 
- function generateQRCode() {
+function generateQRCode() {
   return new Promise((resolve, reject) => {
     const qrListener = (qr) => {
       qrcode.toDataURL(qr, (err, url) => {
@@ -30,12 +32,15 @@ client.initialize();
       });
     };
 
-    client.on("qr", qrListener);
+    client.once("qr", qrListener);
+    client.once("ready", () => {
+      client.removeListener("qr", qrListener);
+    });
   });
 }
 
-client.on("ready", () => {
-  console.log("WhatsApp Client is ready for connectin!");
+client.once("ready", () => {
+  console.log("WhatsApp Client is ready for connection!");
   client.removeAllListeners("qr");
 });
 
