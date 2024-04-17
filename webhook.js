@@ -1,5 +1,4 @@
 const { sendMessage } = require("./whatsapp");
-const context = require('./context');
 
 
 
@@ -31,20 +30,16 @@ async function handleWebhook(req, res) {
 
   // Extracting specific values
   const firstName = fields.find((field) => field.label === "First Name")?.value;
-  context.emit('firstName', firstName);
 
   const pNumber = fields.find((field)=> field.label === "Phone")?.value
-  context.emit('number', pNumber);
 
   const moveInDate = fields.find((field) => field.label === "Move-in date")?.value;
   const parts = moveInDate.split("-");
   const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-  context.emit('date', moveInDate);
 
   const householdComposition = fields.find((field) => field.label === "Please describe the composition of the household.")?.options.find((option) => option.id === fields.find((field) => field.label === "Please describe the composition of the household.").value[0])?.text;
   const interior = fields.find((field) => field.label === "Interior")?.options.find((option) => option.id === fields.find((field) => field.label === "Interior").value[0])?.text;
   const budget = fields.find((field) => field.label === "Budget")?.value;
-  context.emit('budget', budget);
 
   const chosenCityOption = fields.find((field) => field.label === "City")?.options.find((option) => option.id === fields.find((field) => field.label === "City").value[0]);
   const chosenCity = chosenCityOption?.text;
