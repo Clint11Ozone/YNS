@@ -1,7 +1,6 @@
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
 const { getConversationState, setConversationState } = require("./conversationState");
-const context = require("./context");
 
 const client = new Client({
   authStrategy: new LocalAuth({ dataPath: "sessions" }),
@@ -55,13 +54,6 @@ async function sendMessage(phoneNumber, message, firstName = "") {
 }
 
 let firstName = "";
-
-context.on("firstName", (name) => {
-  firstName = name;
-});
-context.on("budget", (budget) => {
-  newBudget = budget;
-});
 
 client.on("message", async (msg) => {
   if (msg.body.toLowerCase() === "start") {
