@@ -11,7 +11,7 @@ const client = new Client({
   }
 });
 
-client.setMaxListeners(5);
+client.setMaxListeners(100);
 client.initialize();
 
 let qrDataUrl = null; // Initialize the variable to store the QR code data URL
@@ -19,7 +19,6 @@ let qrDataUrl = null; // Initialize the variable to store the QR code data URL
 function generateQRCode() {
   return new Promise((resolve, reject) => {
     if (qrDataUrl) {
-      // If the QR code data URL is already stored, return it
       resolve(qrDataUrl);
     } else {
       const qrListener = (qr) => {
@@ -27,16 +26,18 @@ function generateQRCode() {
           if (err) {
             reject(err);
           } else {
-            qrDataUrl = url; // Store the generated QR code data URL
+            qrDataUrl = url;
+            client.removeListener("qr", qrListener); // Remove the listener after generating the QR code
             resolve(url);
           }
         });
       };
 
-      client.on("qr", qrListener);
+      client.once("qr", qrListener); // Ensures the listener is added only once
     }
   });
 }
+
 
 client.once("ready", () => {
   console.log("WhatsApp Client is ready for connection!");
