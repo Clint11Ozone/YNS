@@ -47,7 +47,7 @@ function generateQRCode() {
   });
 }
 
-client.on("ready", () => {
+client.once("ready", () => {
   console.log("WhatsApp Client is ready for connectin!");
   client.removeAllListeners("qr");
 });
