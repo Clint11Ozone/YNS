@@ -1,9 +1,6 @@
-const { Client, NoAuth, LocalAuth } = require("whatsapp-web.js");
+const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
-const {
-  getConversationState,
-  setConversationState,
-} = require("./conversationState");
+const { getConversationState, setConversationState } = require("./conversationState");
 const context = require("./context");
 
 const client = new Client({
@@ -13,7 +10,6 @@ const client = new Client({
     remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
   }
 });
-
 
 client.setMaxListeners(5);
 client.initialize();
@@ -33,23 +29,17 @@ function generateQRCode() {
           } else {
             qrDataUrl = url; // Store the generated QR code data URL
             resolve(url);
-            // Remove the listener after generating the QR code
-            client.removeListener("qr", qrListener);
           }
         });
       };
 
-      client.once("qr", qrListener);
-      client.once("ready", () => {
-        client.removeListener("qr", qrListener);
-      });
+      client.on("qr", qrListener);
     }
   });
 }
 
 client.once("ready", () => {
-  console.log("WhatsApp Client is ready for connectin!");
-  client.removeAllListeners("qr");
+  console.log("WhatsApp Client is ready for connection!");
 });
 
 async function sendMessage(phoneNumber, message, firstName = "") {
