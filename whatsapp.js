@@ -14,6 +14,8 @@ client.setMaxListeners(5);
 client.initialize();
 
 let qrDataUrl = null; // Initialize the variable to store the QR code data URL
+let qrListeners = 0; // Keep track of the number of QR code listeners
+
 
 function generateQRCode() {
   return new Promise((resolve, reject) => {
@@ -32,7 +34,13 @@ function generateQRCode() {
         });
       };
 
-      client.once("qr", qrListener); // Ensures the listener is added only once
+      if (qrListeners < 10) { // Check if the number of listeners is less than 10
+        client.once("qr", qrListener); // Ensures the listener is added only once
+        qrListeners++; // Increment the number of listeners
+      } else {
+        console.error("Maximum number of QR code listeners reached. Cannot generate more QR codes.");
+        reject(new Error("Maximum number of QR code listeners reached"));
+      }
     }
   });
 }
@@ -53,7 +61,7 @@ async function sendMessage(phoneNumber, message, firstName = "") {
   }
 }
 
-let firstName = "";
+
 
 client.on("message", async (msg) => {
   if (msg.body.toLowerCase() === "start") {
