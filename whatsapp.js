@@ -48,6 +48,11 @@ function generateQRCode() {
 
 client.once("ready", () => {
   console.log("WhatsApp Client is ready for connection!");
+  if (typeof window !== 'undefined') {
+    // This will work only if this script is run in a browser environment where 'window' is defined
+    const event = new Event('whatsappConnected');
+    window.dispatchEvent(event);
+  }
 });
 
 async function sendMessage(phoneNumber, message, firstName = "") {
