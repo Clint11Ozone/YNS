@@ -14,7 +14,7 @@ let lastQRCodeGeneration = 0; // Keep track of the last time a QR code was gener
 app.get('/', async (req, res) => {
     const now = Date.now();
     const timeElapsed = now - lastQRCodeGeneration;
-    const waitTime = 2 * 60 * 1000; // 2 minutes in milliseconds
+    const waitTime = 0.5 * 60 * 1000; // 2 minutes in milliseconds
 
     if (timeElapsed >= waitTime) {
         try {
