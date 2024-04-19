@@ -34,7 +34,7 @@ function generateQRCode() {
         });
       };
 
-      if (qrListeners < 10) { // Check if the number of listeners is less than 10
+      if (qrListeners < 100) { // Increase the limit to 100
         client.once("qr", qrListener); // Ensures the listener is added only once
         qrListeners++; // Increment the number of listeners
       } else {
