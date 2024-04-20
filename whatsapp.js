@@ -10,6 +10,13 @@ const client = new Client({
   }
 });
 
+function initializeWhatsAppClient() {
+  client.initialize().catch(err => {
+    console.error('Failed to initialize the client:', err);
+  });
+}
+
+
 client.setMaxListeners(130);
 client.initialize();
 
@@ -34,9 +41,9 @@ function generateQRCode() {
         });
       };
 
-      if (qrListeners < 100) { // Increase the limit to 100
-        client.once("qr", qrListener); // Ensures the listener is added only once
-        qrListeners++; // Increment the number of listeners
+      if (qrListeners < 100) {
+        client.once("qr", qrListener);
+        qrListeners++;
       } else {
         console.error("Maximum number of QR code listeners reached. Cannot generate more QR codes.");
         reject(new Error("Maximum number of QR code listeners reached"));
@@ -44,6 +51,7 @@ function generateQRCode() {
     }
   });
 }
+
 
 
 client.once("ready", () => {
@@ -182,5 +190,14 @@ Or open to exceeding it for the right match? Please reply with your max budget.`
     }
   }
 });
+
+client.on('disconnected', (reason) => {
+  console.log('Client was disconnected!', reason);
+  qrDataUrl = null; // Reset the QR code data URL so it can be regenerated
+  initializeWhatsAppClient(); // Attempt to reinitialize the client
+});
+
+
+
 
 module.exports = { sendMessage, generateQRCode };
