@@ -2,6 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { handleWebhook } = require('./webhook');
 const { generateQRCode } = require('./whatsapp'); // Import the generateQRCode function
+const { startKeepAlive } = require('./keepalive');
+
+startKeepAlive();
+
 
 const app = express();
 const port = process.env.PORT || 3003;
