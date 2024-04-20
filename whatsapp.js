@@ -1,6 +1,7 @@
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
 const { getConversationState, setConversationState } = require("./conversationState");
+const { getBudget, setBudget } = require('./state');
 
 const client = new Client({
   authStrategy: new LocalAuth({ dataPath: "sessions" }),
@@ -151,12 +152,13 @@ Feel free to reach out if you have any questions or need further assistance! �
         }, 2000);
         break;
       case "question3":
-        const budget1 = newBudget;
+        const budget = getBudget();
+
         setConversationState(userId, { stage: "question4" });
         setTimeout(() => {
           client.sendMessage(
             userId,
-            `Shall we stick to listings within your budget of €${budget1} only? 😊 
+            `Shall we stick to listings within your budget of €${budget} only? 😊 
 
 Or open to exceeding it for the right match? Please reply with your max budget.`
           );

@@ -1,6 +1,5 @@
 const { sendMessage } = require("./whatsapp");
-
-
+const { getBudget, setBudget } = require('./state');
 
 async function checkMoveInDate(moveInDate) {
   // Calculate the difference in milliseconds between move-in date and today
@@ -22,6 +21,7 @@ const cityBudgets = [
 ];
 
 let firstName;
+var budget1 = "";
 
 async function handleWebhook(req, res) {
   const payload = req.body;
@@ -40,6 +40,9 @@ async function handleWebhook(req, res) {
   const householdComposition = fields.find((field) => field.label === "Please describe the composition of the household.")?.options.find((option) => option.id === fields.find((field) => field.label === "Please describe the composition of the household.").value[0])?.text;
   const interior = fields.find((field) => field.label === "Interior")?.options.find((option) => option.id === fields.find((field) => field.label === "Interior").value[0])?.text;
   const budget = fields.find((field) => field.label === "Budget")?.value;
+  setBudget(budget);
+
+  
 
   const chosenCityOption = fields.find((field) => field.label === "City")?.options.find((option) => option.id === fields.find((field) => field.label === "City").value[0]);
   const chosenCity = chosenCityOption?.text;
@@ -81,6 +84,6 @@ async function handleWebhook(req, res) {
 
 
 
-module.exports = { handleWebhook};
+module.exports = { handleWebhook, budget1};   
 
 
