@@ -1,7 +1,7 @@
 const http = require('http');
 const cron = require('node-cron');
 
-const targetUrl = 'https://your-render-app-url.onrender.com'; // Replace with your Render app URL
+const targetUrl = 'https://yns23.onrender.com'; // Replace with your Render app URL
 
 function pingServer() {
   http.get(targetUrl, (res) => {
