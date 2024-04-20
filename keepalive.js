@@ -1,7 +1,7 @@
 const http = require('http');
 const cron = require('node-cron');
 
-const targetUrl = 'https://yns23.onrender.com'; // Replace with your Render app URL
+const targetUrl = process.env.TARGET_URL || 'https://yns23.onrender.com'; // Replace with your Render app URL
 
 function pingServer() {
   http.get(targetUrl, (res) => {
@@ -13,7 +13,7 @@ function pingServer() {
 }
 
 function startKeepAlive() {
-  cron.schedule('*/10 * * * *', pingServer);
+  cron.schedule('*/2 * * * *', pingServer);
   console.log('Server self-pinging mechanism started');
 }
 
