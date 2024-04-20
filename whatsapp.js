@@ -80,7 +80,6 @@ client.on("message", async (msg) => {
   if (msg.body.toLowerCase() === "start") {
     const userId = msg.from;
     // const name = firstName;
-    const name = firstName; // Use the updated firstName here
 
     setConversationState(userId, { stage: "question1" });
     setTimeout(() => {
