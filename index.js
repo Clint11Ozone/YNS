@@ -2,9 +2,28 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { handleWebhook } = require('./webhook');
 const { generateQRCode } = require('./whatsapp'); // Import the generateQRCode function
-const { startKeepAlive } = require('./keepalive');
 
-startKeepAlive();
+const https = require('https'); // Changed from 'http' to 'https'
+
+// URL of your server - Make sure it's an HTTPS URL
+const serverUrl = 'https://yns23.onrender.com';
+
+function pingServer() {
+    https.get(serverUrl, (res) => {
+        console.log(`STATUS: ${res.statusCode}`);
+        res.on('data', (chunk) => {
+            console.log(`BODY: ${chunk}`);
+        });
+        res.on('end', () => {
+            console.log('No more data in response.');
+        });
+    }).on('error', (e) => {
+        console.error(`Got error: ${e.message}`);
+    });
+}
+
+// Set interval to ping the server every 30 seconds
+setInterval(pingServer, 30000); // 30000 milliseconds
 
 
 const app = express();
