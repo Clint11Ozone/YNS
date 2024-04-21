@@ -6,7 +6,7 @@ const { generateQRCode } = require('./whatsapp'); // Import the generateQRCode f
 const https = require('https'); // Changed from 'http' to 'https'
 
 // URL of your server - Make sure it's an HTTPS URL
-const serverUrl = 'https://yns23.onrender.com';
+const serverUrl = 'https://yns.abslm.nl';
 
 function pingServer() {
     https.get(serverUrl, (res) => {
