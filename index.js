@@ -10,20 +10,14 @@ const serverUrl = 'https://yns23.onrender.com';
 
 function pingServer() {
     https.get(serverUrl, (res) => {
-        console.log(`STATUS: ${res.statusCode}`);
-        res.on('data', (chunk) => {
-            console.log(`BODY: ${chunk}`);
-        });
-        res.on('end', () => {
-            console.log('No more data in response.');
-        });
+        console.log(`Server pinged, STATUS: ${res.statusCode}`); // Log only the status code
     }).on('error', (e) => {
-        console.error(`Got error: ${e.message}`);
+        console.error(`Got error: ${e.message}`); // Log errors if any
     });
 }
 
 // Set interval to ping the server every 30 seconds
-setInterval(pingServer, 30000); // 30000 milliseconds
+setInterval(pingServer, 600000); // 30000 milliseconds
 
 
 const app = express();
